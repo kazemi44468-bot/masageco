@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://kazemi44468-bot.github.io/masageco/sitemap.xml
