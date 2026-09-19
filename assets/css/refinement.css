@@ -1,8 +1,4 @@
-@font-face {
-  font-family: "ShekastehLocal";
-  src: url("../fonts/shekasteh%20v2.001.ttf") format("truetype");
-  font-weight:400;font-style:normal;font-display:swap;
-}
+@font-face{font-family:"ShekastehLocal";src:url("../fonts/shekasteh%20v2.001.ttf") format("truetype");font-weight:400;font-style:normal;font-display:swap}
 :root{--menu-ink:#195c57;--menu-teal:#2f9f96;--menu-mint:#e5f5ee;--menu-peach:#f5b39d;--menu-sun:#f1c66b}
 .site-header{position:sticky;top:0;z-index:100;background:rgba(255,252,247,.91);border-bottom:1px solid rgba(25,92,87,.1);box-shadow:0 8px 30px rgba(25,92,87,.06);backdrop-filter:blur(18px)}
 .header-top{min-height:34px;color:#71817c;font-size:.69rem}.header-top-links{gap:7px}.header-top-links a{padding:4px 11px;border:1px solid rgba(25,92,87,.1);border-radius:999px;transition:.25s}.header-top-links a:hover{background:var(--menu-mint);border-color:rgba(47,159,150,.24);color:var(--menu-teal)}
@@ -93,3 +89,32 @@
 .service-care{padding:78px 0;background:#eaf4ef}.care-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}.care-grid p{font-size:.78rem}.care-grid .eyebrow{color:#2f9f96}
 @media(max-width:1100px){.category-grid{grid-template-columns:repeat(2,1fr)}.services-hero-grid{grid-template-columns:1fr 250px}.selection-grid,.special-grid{grid-template-columns:1fr;gap:40px}.pricing-grid{grid-template-columns:1fr 1fr}.price-card.featured{transform:none}.pricing-notes{grid-template-columns:1fr 1fr}.org-card{grid-template-columns:1fr 220px}}
 @media(max-width:700px){.services-hero-grid{grid-template-columns:1fr;gap:55px}.services-hero-mark{width:190px;height:190px}.services-hero-mark img{width:105px;height:105px}.services-hero-mark span{bottom:21px;font-size:.52rem}.category-grid,.pricing-grid,.pricing-notes{grid-template-columns:1fr}.category-card{min-height:0;padding:23px 19px 65px}.category-card p{min-height:0}.selection-grid{gap:25px}.selection-steps{grid-template-columns:1fr}.selection-steps article{min-height:0}.selection-steps b{margin-bottom:20px}.special-grid{gap:25px}.special-visual{min-height:240px}.special-visual:before{width:210px;height:210px}.special-visual img{width:120px;height:120px}.special-visual img+img{width:72px;height:72px;right:16%;bottom:8px}.special-list{grid-template-columns:1fr}.org-card{grid-template-columns:1fr;padding:30px 22px;gap:35px;border-radius:25px}.org-mark{width:175px;height:175px;justify-self:center}.org-mark img{width:105px;height:105px}.org-grid{grid-template-columns:1fr}.care-grid{grid-template-columns:1fr;gap:15px}.price-card{padding:27px 22px}.price-card>strong{font-size:1.4rem}}
+
+/* Typography and compact footer refinement */
+.footer-brand{padding:34px 0 28px;gap:18px}
+.footer-brand h2{font-size:clamp(1.15rem,2vw,1.65rem);line-height:1.6}
+.footer-brand p{font-size:.74rem;line-height:1.9}
+.footer-logo{width:62px;height:62px;border-radius:19px}
+.footer-logo img{width:46px;height:46px}
+.footer-book{font-size:.72rem;padding:10px 14px}
+.footer-grid{display:none!important}
+.footer-logo-rail{padding:14px 0 17px;gap:12px}
+.footer-logo-rail img{width:48px;height:48px;padding:6px;border-radius:13px}
+.footer-bottom{padding:12px 0 16px;font-size:.6rem}
+.hero h1,.visual-content h2,.quote-section blockquote,.page-hero h1,.intro-copy h2,.section-head h2,.gallery-head h2,.final-cta h2,.massage-card strong,.footer-brand h2,.about-story-lead h2,.about-process-head h2,.audience-copy h2,.identity-panel h2,.vision-card h2,.about-manifesto h2,.selection-grid h2,.special-grid h2,.org-copy h2,.care-grid h2{font-family:"ShekastehLocal","VazirLocal",BYekanLocal,Tahoma,sans-serif;font-weight:400}
+.page-hero h1{font-size:clamp(2rem,3.7vw,3.25rem);line-height:1.5}
+.section-head h2,.gallery-head h2,.intro-copy h2,.final-cta h2{font-size:clamp(1.65rem,2.8vw,2.45rem);line-height:1.6}
+.about-story-lead h2,.about-process-head h2,.audience-copy h2,.identity-panel h2,.vision-card h2,.about-manifesto h2,.selection-grid h2,.special-grid h2,.org-copy h2,.care-grid h2{font-size:clamp(1.65rem,2.8vw,2.45rem);line-height:1.65}
+.services-hero-grid h1{font-size:clamp(2rem,3.7vw,3.25rem);line-height:1.5}
+@media(max-width:700px){
+ .footer-brand{padding:28px 0 22px;gap:12px}
+ .footer-brand h2{font-size:1.15rem}
+ .footer-brand p{font-size:.68rem}
+ .footer-logo{width:55px;height:55px}
+ .footer-logo img{width:41px;height:41px}
+ .footer-logo-rail{gap:7px;padding:11px 0 13px}
+ .footer-logo-rail img{width:40px;height:40px;padding:5px}
+ .footer-bottom{font-size:.57rem}
+ .page-hero h1,.services-hero-grid h1{font-size:clamp(1.85rem,8vw,2.45rem);line-height:1.55}
+ .section-head h2,.gallery-head h2,.intro-copy h2,.final-cta h2,.about-story-lead h2,.about-process-head h2,.audience-copy h2,.identity-panel h2,.vision-card h2,.about-manifesto h2,.selection-grid h2,.special-grid h2,.org-copy h2,.care-grid h2{font-size:1.65rem;line-height:1.65}
+}
