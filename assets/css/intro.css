@@ -12,13 +12,7 @@
   font-style: normal;
   font-display: swap;
 }
-@font-face {
-  font-family: "ShekastehLocal";
-  src: url("../fonts/shekasteh%20v2.001.ttf") format("truetype");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
+@font-face{font-family:"ShekastehLocal";src:url("../fonts/shekasteh%20v2.001.woff") format("woff"),url("../fonts/shekasteh%20v2.001.ttf") format("truetype"),url("../fonts/shekasteh%20v2.001.eot") format("embedded-opentype");font-weight:400;font-style:normal;font-display:swap}
 :root {
   --aqua: #2f9f96;
   --aqua-deep: #176c68;
