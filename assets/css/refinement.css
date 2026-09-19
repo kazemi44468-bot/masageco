@@ -1,4 +1,6 @@
-@font-face{font-family:"ShekastehLocal";src:url("../fonts/shekasteh%20v2.001.ttf") format("truetype");font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:"ShekastehLocal";src:url("../fonts/shekasteh%20v2.001.woff") format("woff"),url("../fonts/shekasteh%20v2.001.ttf") format("truetype"),url("../fonts/shekasteh%20v2.001.eot") format("embedded-opentype");font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:"VazirmatnLocal";src:url("../fonts/Vazirmatn-Regular.woff2") format("woff2"),url("../fonts/Vazirmatn-Regular.ttf") format("truetype");font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:"VazirmatnLocal";src:url("../fonts/Vazirmatn-Bold.woff2") format("woff2"),url("../fonts/Vazirmatn-Bold.ttf") format("truetype");font-weight:700;font-style:normal;font-display:swap}
 :root{--menu-ink:#195c57;--menu-teal:#2f9f96;--menu-mint:#e5f5ee;--menu-peach:#f5b39d;--menu-sun:#f1c66b}
 .site-header{position:sticky;top:0;z-index:100;background:rgba(255,252,247,.91);border-bottom:1px solid rgba(25,92,87,.1);box-shadow:0 8px 30px rgba(25,92,87,.06);backdrop-filter:blur(18px)}
 .header-top{min-height:34px;color:#71817c;font-size:.69rem}.header-top-links{gap:7px}.header-top-links a{padding:4px 11px;border:1px solid rgba(25,92,87,.1);border-radius:999px;transition:.25s}.header-top-links a:hover{background:var(--menu-mint);border-color:rgba(47,159,150,.24);color:var(--menu-teal)}
@@ -187,3 +189,7 @@ html,body{font-family:"VazirmatnLocal",BYekanLocal,Tahoma,sans-serif}
 .about-model-grid p{margin:0;color:#71807b;font-size:.7rem;line-height:2}
 @media(max-width:980px){.about-model-grid{grid-template-columns:1fr 1fr}}
 @media(max-width:700px){.about-model-grid{grid-template-columns:1fr}.about-model-grid article{min-height:0}}
+
+/* Final typography correction */
+body{font-family:"VazirmatnLocal","VazirLocal",BYekanLocal,Tahoma,sans-serif}
+.hero h1,.visual-content h2,.quote-section blockquote,.page-hero h1,.intro-copy h2,.section-head h2,.gallery-head h2,.final-cta h2,.massage-card strong,.footer-brand h2,.about-story-lead h2,.about-process-head h2,.audience-copy h2,.identity-panel h2,.vision-card h2,.about-manifesto h2,.selection-grid h2,.special-grid h2,.org-copy h2,.care-grid h2,.contact-hero-title,.contact-section-title,.contact-panel h2,.contact-request h2,.contact-org h2{font-family:"ShekastehLocal","VazirmatnLocal",sans-serif!important;font-weight:400!important}
