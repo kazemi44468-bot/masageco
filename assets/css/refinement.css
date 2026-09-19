@@ -176,3 +176,14 @@ html,body{font-family:"VazirmatnLocal",BYekanLocal,Tahoma,sans-serif}
 .about-vision{background:#fffaf5;padding-top:0}
 @media(max-width:980px){.contact-hero-grid,.contact-layout,.contact-trust-grid{grid-template-columns:1fr;gap:35px}.contact-hero-mark{width:215px;height:215px}.contact-methods{grid-template-columns:1fr 1fr}.contact-org-card{grid-template-columns:1fr}.contact-org-mark{justify-self:start}.contact-trust-cards{grid-template-columns:1fr 1fr}}
 @media(max-width:700px){.site-header .main-nav{min-height:64px!important}.site-header .second-nav{display:none!important}.contact-hero{padding-bottom:35px!important}.contact-hero-title{font-size:clamp(2rem,9vw,2.7rem)!important}.contact-hero-mark{width:185px;height:185px}.contact-hero-mark img{width:98px;height:98px}.contact-layout{gap:14px}.contact-panel,.contact-request{padding:27px 21px;border-radius:24px}.contact-methods,.contact-trust-cards{grid-template-columns:1fr}.contact-panel-actions .btn{width:100%}.contact-trust,.contact-org{padding:58px 0}.contact-org-card{padding:29px 22px;border-radius:24px}.contact-org-mark{width:160px;height:160px}.contact-org-mark img{width:95px;height:95px}.contact-option{grid-template-columns:auto 1fr}.contact-option b{display:none}}
+
+.about-model{background:linear-gradient(180deg,#f7fbf7,#fffaf5)}
+.about-model-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}
+.about-model-grid article{position:relative;min-height:285px;padding:25px 22px;border:1px solid rgba(25,92,87,.08);border-radius:25px;background:#fff;box-shadow:0 16px 38px rgba(25,92,87,.05);overflow:hidden;transition:.3s}
+.about-model-grid article:hover{transform:translateY(-5px);box-shadow:0 23px 45px rgba(25,92,87,.09)}
+.about-model-grid img{width:68px;height:68px;object-fit:contain;margin-bottom:30px;padding:8px;border-radius:18px;background:#edf7f1}
+.about-model-grid article>span{display:block;color:#2f9f96;font-size:.68rem;margin-bottom:9px}
+.about-model-grid h3{margin:0 0 10px;color:#195c57;font-size:1rem}
+.about-model-grid p{margin:0;color:#71807b;font-size:.7rem;line-height:2}
+@media(max-width:980px){.about-model-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:700px){.about-model-grid{grid-template-columns:1fr}.about-model-grid article{min-height:0}}
