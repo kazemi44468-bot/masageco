@@ -21,3 +21,11 @@
 .quote-section .container{position:relative}
 .quote-brand-mark{position:absolute;left:2%;top:50%;width:118px;height:118px;object-fit:contain;opacity:.13;transform:translateY(-50%) rotate(-7deg);pointer-events:none;filter:saturate(.8)}
 @media(max-width:700px){.service-brand-mark{width:48px!important;height:48px!important;top:12px;right:12px;padding:7px}.quote-brand-mark{width:82px;height:82px;left:3%;opacity:.1}}
+
+.inner-brand-mark{display:block;width:46px;height:46px;object-fit:contain;margin:0 0 14px;padding:7px;border-radius:14px;background:rgba(229,245,238,.62);border:1px solid rgba(25,92,87,.08);box-shadow:0 8px 20px rgba(25,92,87,.08)}
+.service-icon{position:relative;display:grid!important;place-items:center;overflow:hidden}
+.service-icon img{position:absolute;inset:50% auto auto 50%;width:54px;height:54px;object-fit:contain;transform:translate(-50%,-50%);opacity:.16;pointer-events:none}
+.service-icon span{position:relative;z-index:1}
+.contact-card{position:relative;overflow:hidden}
+.contact-brand-mark{position:absolute;left:24px;top:22px;width:78px;height:78px;object-fit:contain;opacity:.14;transform:rotate(-8deg);pointer-events:none}
+@media(max-width:700px){.inner-brand-mark{width:40px;height:40px;margin-bottom:10px}.contact-brand-mark{width:62px;height:62px;left:16px;top:16px}}
