@@ -1,0 +1,42 @@
+name: Fetch 70 massage photos
+on:
+  workflow_dispatch:
+    inputs:
+      target_count:
+        description: "Number of photos to add"
+        required: true
+        default: "70"
+      replace_existing:
+        description: "Replace the current photo-001.. photo-070 set"
+        type: boolean
+        required: true
+        default: false
+permissions:
+  contents: write
+concurrency:
+  group: fetch-massage-photos
+  cancel-in-progress: false
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Fetch real massage photos from image search
+        run: python scripts/fetch_massage_photos.py --count "${{ inputs.target_count }}" ${{ inputs.replace_existing && '--replace' || '' }}
+      - name: Commit downloaded photos
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/images/massage
+          if git diff --cached --quiet; then
+            echo "No new image files to commit."
+            exit 0
+          fi
+          git commit -m "Add real massage photos from image search"
+          git push
