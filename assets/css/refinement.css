@@ -279,7 +279,7 @@ body.lightbox-open{overflow:hidden}
 .footer-brand p,.footer-kicker{color:rgba(255,249,235,.74)}
 .footer-book{border:1px solid rgba(232,211,173,.38);background:linear-gradient(135deg,rgba(255,255,255,.12),rgba(255,255,255,.04));box-shadow:0 12px 26px rgba(0,0,0,.1)}
 .footer-bottom{border-top:1px solid rgba(239,228,201,.13);color:rgba(255,249,235,.64)}
-.knowledge-hero{position:relative;overflow:hidden;background:linear-gradient(115deg,rgba(18,61,55,.94),rgba(24,91,79,.85)),url('https://images.pexels.com/photos/3757942/pexels-photo-3757942.jpeg?auto=compress&cs=tinysrgb&w=1800') center/cover;color:#fff;padding:clamp(58px,8vw,108px) 0}
+.knowledge-hero{position:relative;overflow:hidden;background:linear-gradient(115deg,rgba(18,61,55,.94),rgba(24,91,79,.85)),url('https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1600&q=75') center/cover;color:#fff;padding:clamp(58px,8vw,108px) 0}
 .knowledge-hero:after{content:"";position:absolute;inset:14px;border:1px solid rgba(230,203,157,.32);border-radius:30px;pointer-events:none}
 .knowledge-hero .container{position:relative;z-index:1}
 .knowledge-hero h1{font-size:clamp(2rem,4vw,3.5rem);line-height:1.65;color:#fff8e9;margin:12px 0}
