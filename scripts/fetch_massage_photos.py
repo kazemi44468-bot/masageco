@@ -30,6 +30,25 @@ QUERIES = [
     "traditional Persian massage therapy",
     "back neck shoulder massage therapy",
     "spa massage treatment room therapist",
+    "luxury spa oil massage professional therapist",
+    "relaxing back massage spa warm natural light",
+    "professional full body massage draped spa treatment",
+    "couples spa massage side by side wellness",
+    "aromatherapy massage oil treatment elegant spa",
+    "hot towel massage therapy wellness studio",
+    "massage therapist hands oil treatment close up",
+    "luxury resort spa massage treatment room",
+    "relaxing shoulder neck massage wellness spa",
+    "Thai massage traditional spa treatment",
+    "Balinese spa massage oil treatment",
+    "stone therapy massage professional spa",
+    "foot reflexology massage luxury spa",
+    "face and head massage spa treatment",
+    "professional massage therapist wellness studio",
+    "natural light spa massage treatment",
+    "premium wellness massage oil treatment",
+    "therapeutic massage studio neutral linens",
+    "spa treatment with towels and essential oils",
 ]
 HEADERS = {"User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/131.0 Safari/537.36"}
 SESSION = requests.Session()
@@ -89,12 +108,17 @@ def download(url: str, path: Path) -> bool:
     except (requests.RequestException, OSError, ValueError):
         return False
 
+def write_index() -> None:
+    import json
+    files = sorted((p for p in DEST.glob("photo-*") if p.suffix.lower() in {".jpg", ".jpeg", ".png", ".webp", ".avif"}), key=lambda p: int(re.search(r"photo-(\\d+)", p.stem).group(1)))
+    (DEST / "gallery-index.json").write_text(json.dumps([p.name for p in files], ensure_ascii=False, indent=2), encoding="utf-8")
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--count", type=int, default=70)
     parser.add_argument("--replace", action="store_true")
     args = parser.parse_args()
-    target = max(1, min(args.count, 70))
+    target = max(1, min(args.count, 170))
     DEST.mkdir(parents=True, exist_ok=True)
     if args.replace:
         for old in DEST.glob("photo-*"):
@@ -103,6 +127,7 @@ def main() -> int:
     existing = sorted(DEST.glob("photo-*"))
     target_new = max(0, target - len(existing))
     if target_new == 0:
+        write_index()
         print(f"Already have {len(existing)} photos; target is {target}. Nothing to download.")
         return 0
     next_index = max([int(m.group(1)) for p in existing if (m := re.match(r"photo-(\d+)", p.stem))] + [0]) + 1
@@ -129,6 +154,7 @@ def main() -> int:
                 pass
         if saved >= target_new:
             break
+    write_index()
     print(f"Finished: downloaded {saved} photo(s); requested total {target}; existing {len(existing)}; added {saved}.")
     if saved == 0:
         print("Bing image search returned no downloadable photos; inspect the log before retrying.", file=sys.stderr)
