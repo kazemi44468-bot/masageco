@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Search Bing Images and download real massage photographs into the repository."""
+"""Download massage-only photos; reject image-search results without massage-related metadata."""
 from __future__ import annotations
 import argparse, html, mimetypes, re, sys, time
 from pathlib import Path
