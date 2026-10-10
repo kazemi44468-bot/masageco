@@ -1,5 +1,8 @@
 name: Fetch curated massage photos
 on:
+  push:
+    paths:
+      - "scripts/fetch_massage_photos.py"
   workflow_dispatch:
     inputs:
       target_count:
