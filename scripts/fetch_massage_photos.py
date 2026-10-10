@@ -9,9 +9,23 @@ import requests
 ROOT = Path(__file__).resolve().parents[1]
 DEST = ROOT / "assets" / "images" / "massage"
 QUERIES = [
-    '"professional massage therapist massaging client back" -illustration -logo',
+    '"sensual oil massage spa treatment adult" -illustration',
+    '"luxury full body oil massage professional therapist client" photo',
+    '"relaxing full body massage warm candlelight spa" photo',
+    '"bare shoulder back massage oil treatment spa" photo',
+    '"massage therapist applying oil to back close up" real photo',
+    '"premium spa massage draped client natural skin texture" photo',
+    '"Balinese full body massage luxury resort spa" photo',
+    '"aromatherapy massage warm light professional treatment" photo',
+    '"couples massage luxury spa treatment room" photo',
+    '"romantic spa couples massage adults wellness" photo',
+    '"sensory relaxation massage spa oil treatment" photo',
+    '"professional massage therapist oil massage back shoulders" photo',
+    '"massage with warm oil closeup hands on skin" spa photo',
+    '"full body massage treatment professional spa linens" photo',
+    '"luxury spa massage treatment natural photography" photo',
+    '"Swedish massage therapist client treatment photo"',
     '"deep tissue massage therapy" therapist client photo',
-    '"Swedish massage treatment" therapist client spa photo',
     '"Thai massage therapy" therapist client photo',
     '"Shiatsu massage treatment" therapist client photo',
     '"sports massage therapist" athlete treatment photo',
@@ -63,7 +77,7 @@ def image_urls(query: str) -> list[str]:
     # every file that merely happens to have an image MIME type.
     records = re.finditer(r'"murl"\s*:\s*"((?:\\.|[^"\\])*)"', body)
     relevant = re.compile(r"massage|masseur|masseuse|reflexology|shiatsu|abhyanga|lomi.?lomi|hammam|myofascial|trigger.?point", re.I)
-    irrelevant = re.compile(r"massage chair|massage gun|massage device|massage machine|massage oil bottle|logo|icon|illustration|cartoon|diagram|stock photo watermark", re.I)
+    irrelevant = re.compile(r"massage chair|massage gun|massage device|massage machine|massage oil bottle|logo|icon|illustration|cartoon|diagram|stock photo watermark|porn|sexual intercourse|explicit nude", re.I)
     for match in records:
         # Bing places the result title and description close to murl in its result JSON.
         context = body[max(0, match.start()-900):min(len(body), match.end()+1300)]
