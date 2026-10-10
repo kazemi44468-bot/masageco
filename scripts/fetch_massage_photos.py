@@ -58,6 +58,47 @@ QUERIES = [
     '"traditional Persian massage" therapy photo',
     '"massage therapist demonstrating technique" training photo',
     '"massage therapy oil and hands" real treatment photo',
+    "\"professional massage therapist working on client back\" photography",
+    "\"relaxing massage at boutique wellness spa\" photo",
+    "\"luxury spa treatment massage client lying face down\" photography",
+    "\"oil massage therapist hands shoulders close up\" photography",
+    "\"wellness resort massage treatment natural light\" photo",
+    "\"spa massage treatment detail hands back\" professional photography",
+    "\"massage therapy room neutral linen wood interior\" photo",
+    "\"deep tissue back massage therapist hands closeup\" photography",
+    "\"Swedish massage session spa professional photography\" photo",
+    "\"Thai yoga massage therapist stretching client\" photography",
+    "\"hot stone back massage spa treatment closeup\" photo",
+    "\"reflexology foot massage professional treatment\" photography",
+    "\"head massage spa treatment close up hands\" photo",
+    "\"neck shoulder massage therapist treatment\" photography",
+    "\"sports recovery massage therapist athlete\" photo",
+    "\"physiotherapy manual massage treatment clinic\" photography",
+    "\"lymphatic drainage massage professional treatment\" photo",
+    "\"aromatherapy massage oil hands warm light\" photography",
+    "\"couples spa massage two massage tables\" photo",
+    "\"massage therapist applying lotion back treatment\" photo",
+    "\"wellness spa massage stones towels candles\" photography",
+    "\"massage therapy professional hands on upper back\" photo",
+    "\"relaxation massage treatment room natural textures\" photography",
+    "\"spa therapist foot massage treatment close up\" photo",
+    "\"facial massage therapist hands treatment\" photography",
+    "\"bamboo massage spa therapist treatment\" photo",
+    "\"Ayurvedic oil massage Abhyanga treatment\" photography",
+    "\"Balinese spa massage therapist client\" professional photo",
+    "\"Lomi Lomi massage treatment therapist\" photography",
+    "\"four hand massage treatment luxury spa\" photo",
+    "\"prenatal pregnancy massage professional spa\" photo",
+    "\"myofascial release therapist treatment\" professional photography",
+    "\"trigger point massage physiotherapist hands\" photo",
+    "\"massage training therapist demonstrating technique\" photo",
+    "\"professional massage table clean spa linens\" photography",
+    "\"warm oil massage back spa closeup\" photo",
+    "\"massage therapist preparing massage table spa\" photo",
+    "\"massage therapist using forearm deep tissue technique\" photo",
+    "\"professional body massage spa treatment high resolution\" photo",
+    "\"massage wellness treatment hands and shoulders\" photography",
+    "\"therapeutic back massage spa room\" photo",
 ]
 HEADERS = {"User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/131.0 Safari/537.36"}
 SESSION = requests.Session()
@@ -139,7 +180,7 @@ def main() -> int:
         for old in DEST.glob("photo-*"):
             if old.is_file():
                 old.unlink()
-    existing = sorted(DEST.glob("photo-*"))
+    existing = sorted((p for p in DEST.glob("photo-*") if p.is_file() and p.suffix.lower() in {".jpg", ".jpeg", ".png", ".webp", ".avif"}), key=lambda p: int(re.search(r"photo-(\d+)", p.stem).group(1)))
     target_new = max(0, target - len(existing))
     if target_new == 0:
         write_index()
