@@ -101,6 +101,10 @@ def main() -> int:
             if old.is_file():
                 old.unlink()
     existing = sorted(DEST.glob("photo-*"))
+    target_new = max(0, target - len(existing))
+    if target_new == 0:
+        print(f"Already have {len(existing)} photos; target is {target}. Nothing to download.")
+        return 0
     next_index = max([int(m.group(1)) for p in existing if (m := re.match(r"photo-(\d+)", p.stem))] + [0]) + 1
     saved = 0
     seen = set()
