@@ -9,46 +9,41 @@ import requests
 ROOT = Path(__file__).resolve().parents[1]
 DEST = ROOT / "assets" / "images" / "massage"
 QUERIES = [
-    "Swedish massage therapy professional",
-    "deep tissue massage therapist",
-    "traditional Thai massage stretching",
-    "Shiatsu Japanese massage therapy",
-    "Tui Na Chinese traditional massage",
-    "Ayurvedic Abhyanga oil massage India",
-    "Balinese massage spa treatment",
-    "Lomi lomi Hawaiian massage",
-    "hot stone massage therapy",
-    "aromatherapy essential oil massage",
-    "sports massage physiotherapy",
-    "reflexology foot massage treatment",
-    "head scalp face massage therapy",
-    "prenatal pregnancy massage therapist",
-    "bamboo massage spa treatment",
-    "four hands massage therapy",
-    "traditional hammam Moroccan bath massage",
-    "traditional Iranian hammam massage",
-    "traditional Persian massage therapy",
-    "back neck shoulder massage therapy",
-    "spa massage treatment room therapist",
-    "luxury spa oil massage professional therapist",
-    "relaxing back massage spa warm natural light",
-    "professional full body massage draped spa treatment",
-    "couples spa massage side by side wellness",
-    "aromatherapy massage oil treatment elegant spa",
-    "hot towel massage therapy wellness studio",
-    "massage therapist hands oil treatment close up",
-    "luxury resort spa massage treatment room",
-    "relaxing shoulder neck massage wellness spa",
-    "Thai massage traditional spa treatment",
-    "Balinese spa massage oil treatment",
-    "stone therapy massage professional spa",
-    "foot reflexology massage luxury spa",
-    "face and head massage spa treatment",
-    "professional massage therapist wellness studio",
-    "natural light spa massage treatment",
-    "premium wellness massage oil treatment",
-    "therapeutic massage studio neutral linens",
-    "spa treatment with towels and essential oils",
+    '"professional massage therapist massaging client back" -illustration -logo',
+    '"deep tissue massage therapy" therapist client photo',
+    '"Swedish massage treatment" therapist client spa photo',
+    '"Thai massage therapy" therapist client photo',
+    '"Shiatsu massage treatment" therapist client photo',
+    '"sports massage therapist" athlete treatment photo',
+    '"foot reflexology massage" therapist client photo',
+    '"hot stone massage treatment" therapist client photo',
+    '"aromatherapy oil massage" therapist client photo',
+    '"head scalp massage therapy" therapist client photo',
+    '"neck shoulder massage therapy" therapist client photo',
+    '"back massage treatment" spa therapist photo',
+    '"full body massage therapy" professional therapist draped client photo',
+    '"prenatal massage therapy" professional therapist photo',
+    '"bamboo massage therapy" spa treatment photo',
+    '"four hands massage therapy" professional spa photo',
+    '"Balinese massage therapy" therapist client photo',
+    '"Ayurvedic Abhyanga massage" oil treatment photo',
+    '"Lomi Lomi massage therapy" therapist client photo',
+    '"traditional hammam massage treatment" photo',
+    '"massage therapist hands applying oil" client back photo',
+    '"massage table treatment room" professional spa photo',
+    '"couples massage spa treatment" professional photo',
+    '"massage therapy clinic" therapist treatment photo',
+    '"myofascial release massage therapy" therapist client photo',
+    '"trigger point massage therapy" physiotherapy photo',
+    '"lymphatic drainage massage" therapist client photo',
+    '"relaxation massage treatment" professional therapist photo',
+    '"shoulder massage treatment" spa therapist photo',
+    '"leg massage therapy" professional therapist photo',
+    '"hand massage treatment" spa therapist photo',
+    '"facial massage treatment" professional spa photo',
+    '"traditional Persian massage" therapy photo',
+    '"massage therapist demonstrating technique" training photo',
+    '"massage therapy oil and hands" real treatment photo',
 ]
 HEADERS = {"User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/131.0 Safari/537.36"}
 SESSION = requests.Session()
@@ -64,19 +59,25 @@ def image_urls(query: str) -> list[str]:
         print(f"Search failed for {query!r}: {exc}", file=sys.stderr)
         return []
     found = []
-    # Bing embeds original image URLs in the murl field of image result records.
-    for raw in re.findall(r'"murl"\s*:\s*"((?:\\.|[^"\\])*)"', body):
-        candidate = raw.replace(r"\/", "/").replace(r"\u0026", "&")
-        candidate = bytes(candidate, "utf-8").decode("unicode_escape") if r"\u" in candidate else candidate
+    # Require massage-related metadata from the image result itself; do not accept
+    # every file that merely happens to have an image MIME type.
+    records = re.finditer(r'"murl"\\s*:\\s*"((?:\\\\.|[^"\\\\])*)"', body)
+    relevant = re.compile(r"massage|masseur|masseuse|reflexology|shiatsu|abhyanga|lomi.?lomi|hammam|myofascial|trigger.?point", re.I)
+    irrelevant = re.compile(r"massage chair|massage gun|massage device|massage machine|massage oil bottle|logo|icon|illustration|cartoon|diagram|stock photo watermark", re.I)
+    for match in records:
+        # Bing places the result title and description close to murl in its result JSON.
+        context = body[max(0, match.start()-900):min(len(body), match.end()+1300)]
+        title_match = re.search(r'"t"\\s*:\\s*"((?:\\\\.|[^"\\\\])*)"', context)
+        desc_match = re.search(r'"desc"\\s*:\\s*"((?:\\\\.|[^"\\\\])*)"', context)
+        title = html.unescape(title_match.group(1)) if title_match else ""
+        desc = html.unescape(desc_match.group(1)) if desc_match else ""
+        metadata = f"{title} {desc}"
+        if not relevant.search(metadata) or irrelevant.search(metadata):
+            continue
+        candidate = match.group(1).replace(r"\\/", "/").replace(r"\\u0026", "&")
         candidate = html.unescape(candidate).strip()
         if candidate.startswith(("https://", "http://")):
             found.append(candidate)
-    # Fallback for alternate Bing HTML markup.
-    if not found:
-        for raw in re.findall(r'murl.{0,30}?(https?://[^"\\\s<>]+)', body):
-            candidate = raw.replace("&amp;", "&").rstrip("),")
-            if candidate.startswith(("https://", "http://")):
-                found.append(candidate)
     return list(dict.fromkeys(found))
 
 def download(url: str, path: Path) -> bool:
@@ -115,7 +116,7 @@ def write_index() -> None:
 
 def main() -> int:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--count", type=int, default=70)
+    parser.add_argument("--count", type=int, default=170)
     parser.add_argument("--replace", action="store_true")
     args = parser.parse_args()
     target = max(1, min(args.count, 170))
