@@ -1,4 +1,4 @@
-name: Fetch 70 massage photos
+name: Fetch 170 massage photos
 on:
   push:
     paths:
@@ -9,7 +9,7 @@ on:
       target_count:
         description: "Number of photos to add"
         required: true
-        default: "70"
+        default: "170"
       replace_existing:
         description: "Replace the current photo-001.. photo-070 set"
         type: boolean
@@ -34,7 +34,7 @@ jobs:
       - name: Install downloader dependencies
         run: python -m pip install --disable-pip-version-check requests beautifulsoup4
       - name: Fetch real massage photos from image search
-        run: python scripts/fetch_massage_photos.py --count "${{ inputs.target_count || '70' }}" ${{ inputs.replace_existing && '--replace' || '' }}
+        run: python scripts/fetch_massage_photos.py --count "${{ inputs.target_count || '170' }}" ${{ inputs.replace_existing && '--replace' || '' }}
       - name: Commit downloaded photos
         run: |
           git config user.name "github-actions[bot]"
