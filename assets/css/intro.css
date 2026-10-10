@@ -84,7 +84,7 @@ a { color: inherit; text-decoration: none; }
 }
 
 /* Warm photographic atmosphere on the entry screen */
-.intro-page::after{content:"";position:absolute;inset:0;z-index:-2;pointer-events:none;background:linear-gradient(105deg,rgba(255,250,243,.93) 0%,rgba(246,250,245,.84) 46%,rgba(255,244,233,.72) 100%),url("https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1800&q=78") center/cover no-repeat;opacity:1}
+.intro-page::after{content:"";position:absolute;inset:0;z-index:-2;pointer-events:none;background:linear-gradient(105deg,rgba(255,250,243,.93) 0%,rgba(246,250,245,.84) 46%,rgba(255,244,233,.72) 100%),url("../images/massage/photo-001.jpg") center/cover no-repeat;opacity:1}
 .intro-mark{backdrop-filter:blur(9px)}
 .intro-content{position:relative}
-@media(max-width:700px){.intro-page::after{background-position:58% center;background-image:linear-gradient(180deg,rgba(255,250,243,.91),rgba(246,250,245,.82)),url("https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1100&q=75")}}
+@media(max-width:700px){.intro-page::after{background-position:58% center;background-image:linear-gradient(180deg,rgba(255,250,243,.91),rgba(246,250,245,.82)),url("../images/massage/photo-002.jpg")}}
