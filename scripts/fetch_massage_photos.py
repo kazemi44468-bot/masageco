@@ -61,20 +61,20 @@ def image_urls(query: str) -> list[str]:
     found = []
     # Require massage-related metadata from the image result itself; do not accept
     # every file that merely happens to have an image MIME type.
-    records = re.finditer(r'"murl"\\s*:\\s*"((?:\\\\.|[^"\\\\])*)"', body)
+    records = re.finditer(r'"murl"\s*:\s*"((?:\\.|[^"\\])*)"', body)
     relevant = re.compile(r"massage|masseur|masseuse|reflexology|shiatsu|abhyanga|lomi.?lomi|hammam|myofascial|trigger.?point", re.I)
     irrelevant = re.compile(r"massage chair|massage gun|massage device|massage machine|massage oil bottle|logo|icon|illustration|cartoon|diagram|stock photo watermark", re.I)
     for match in records:
         # Bing places the result title and description close to murl in its result JSON.
         context = body[max(0, match.start()-900):min(len(body), match.end()+1300)]
-        title_match = re.search(r'"t"\\s*:\\s*"((?:\\\\.|[^"\\\\])*)"', context)
-        desc_match = re.search(r'"desc"\\s*:\\s*"((?:\\\\.|[^"\\\\])*)"', context)
+        title_match = re.search(r'"t"\s*:\s*"((?:\\.|[^"\\])*)"', context)
+        desc_match = re.search(r'"desc"\s*:\s*"((?:\\.|[^"\\])*)"', context)
         title = html.unescape(title_match.group(1)) if title_match else ""
         desc = html.unescape(desc_match.group(1)) if desc_match else ""
         metadata = f"{title} {desc}"
         if not relevant.search(metadata) or irrelevant.search(metadata):
             continue
-        candidate = match.group(1).replace(r"\\/", "/").replace(r"\\u0026", "&")
+        candidate = match.group(1).replace(r"\/", "/").replace(r"\u0026", "&")
         candidate = html.unescape(candidate).strip()
         if candidate.startswith(("https://", "http://")):
             found.append(candidate)
