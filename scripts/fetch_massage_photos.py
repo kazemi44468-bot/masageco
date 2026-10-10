@@ -110,7 +110,7 @@ def download(url: str, path: Path) -> bool:
 
 def write_index() -> None:
     import json
-    files = sorted((p for p in DEST.glob("photo-*") if p.suffix.lower() in {".jpg", ".jpeg", ".png", ".webp", ".avif"}), key=lambda p: int(re.search(r"photo-(\\d+)", p.stem).group(1)))
+    files = sorted((p for p in DEST.glob("photo-*") if p.suffix.lower() in {".jpg", ".jpeg", ".png", ".webp", ".avif"}), key=lambda p: int(re.search(r"photo-(\d+)", p.stem).group(1)))
     (DEST / "gallery-index.json").write_text(json.dumps([p.name for p in files], ensure_ascii=False, indent=2), encoding="utf-8")
 
 def main() -> int:
