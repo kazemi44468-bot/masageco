@@ -107,7 +107,7 @@ def main() -> int:
     for query in QUERIES:
         print(f"Searching: {query}")
         for url in image_urls(query):
-            if saved >= target:
+            if saved >= target_new:
                 break
             if url in seen:
                 continue
@@ -123,9 +123,9 @@ def main() -> int:
                 placeholder.unlink(missing_ok=True)
             except OSError:
                 pass
-        if saved >= target:
+        if saved >= target_new:
             break
-    print(f"Finished: downloaded {saved} photo(s); requested {target}.")
+    print(f"Finished: downloaded {saved} photo(s); requested total {target}; existing {len(existing)}; added {saved}.")
     if saved == 0:
         print("Bing image search returned no downloadable photos; inspect the log before retrying.", file=sys.stderr)
         return 1
