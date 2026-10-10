@@ -36,13 +36,13 @@ jobs:
         run: python scripts/fetch_massage_photos.py --count "${{ inputs.target_count || '170' }}" ${{ inputs.replace_existing && '--replace' || '' }}
       - name: Commit downloaded photos
         run: |
-          git pull --rebase origin main
           git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config user.email "41898282+users.noreply.github.com"
           git add assets/images/massage
           if git diff --cached --quiet; then
             echo "No new image files to commit."
             exit 0
           fi
-          git commit -m "Add real massage photos from image search"
+          git commit -m "Add relevant massage photos from image search"
+          git pull --rebase origin main
           git push
