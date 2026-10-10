@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Download massage-only photos; reject image-search results without massage-related metadata."""
+"""Download massage-only photos; commit verified, relevant image-search results safely."""
 from __future__ import annotations
 import argparse, html, mimetypes, re, sys, time
 from pathlib import Path
