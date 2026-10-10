@@ -33,3 +33,20 @@
     });
   }
 })();
+
+/* Massage photography gallery: horizontal slider + accessible lightbox */
+(() => {
+ const tracks=document.querySelectorAll('.massage-gallery-track');
+ tracks.forEach(track=>{
+  const section=track.closest('.massage-gallery-section');
+  section?.querySelector('.gallery-prev')?.addEventListener('click',()=>track.scrollBy({left:track.scrollWidth/Math.max(track.children.length,1)*-2,behavior:'smooth'}));
+  section?.querySelector('.gallery-next')?.addEventListener('click',()=>track.scrollBy({left:track.scrollWidth/Math.max(track.children.length,1)*2,behavior:'smooth'}));
+ });
+ let lightbox=document.querySelector('.massage-lightbox');
+ if(!lightbox){lightbox=document.createElement('div');lightbox.className='massage-lightbox';lightbox.setAttribute('role','dialog');lightbox.setAttribute('aria-modal','true');lightbox.setAttribute('aria-label','نمایش تصویر');lightbox.innerHTML='<button type="button" class="massage-lightbox-close" aria-label="بستن تصویر">×</button><button type="button" class="massage-lightbox-backdrop" aria-label="بستن تصویر"></button><figure><img alt=""><figcaption></figcaption></figure>';document.body.appendChild(lightbox);}
+ const img=lightbox.querySelector('img'),caption=lightbox.querySelector('figcaption');
+ const close=()=>{lightbox.classList.remove('open');document.body.classList.remove('lightbox-open');img.src='';};
+ document.querySelectorAll('.massage-photo-card').forEach(card=>card.addEventListener('click',()=>{img.src=card.dataset.lightboxSrc;img.alt=card.dataset.lightboxAlt||'';caption.textContent=img.alt;lightbox.classList.add('open');document.body.classList.add('lightbox-open');lightbox.querySelector('.massage-lightbox-close').focus();}));
+ lightbox.querySelectorAll('.massage-lightbox-close,.massage-lightbox-backdrop').forEach(b=>b.addEventListener('click',close));
+ document.addEventListener('keydown',e=>{if(e.key==='Escape')close();});
+})();
