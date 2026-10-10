@@ -44,9 +44,24 @@
  });
  let lightbox=document.querySelector('.massage-lightbox');
  if(!lightbox){lightbox=document.createElement('div');lightbox.className='massage-lightbox';lightbox.setAttribute('role','dialog');lightbox.setAttribute('aria-modal','true');lightbox.setAttribute('aria-label','نمایش تصویر');lightbox.innerHTML='<button type="button" class="massage-lightbox-close" aria-label="بستن تصویر">×</button><button type="button" class="massage-lightbox-backdrop" aria-label="بستن تصویر"></button><figure><img alt=""><figcaption></figcaption></figure>';document.body.appendChild(lightbox);}
- const img=lightbox.querySelector('img'),caption=lightbox.querySelector('figcaption');
- const close=()=>{lightbox.classList.remove('open');document.body.classList.remove('lightbox-open');img.src='';};
- document.querySelectorAll('.massage-photo-card,.knowledge-image-button').forEach(card=>card.addEventListener('click',()=>{img.src=card.dataset.lightboxSrc;img.alt=card.dataset.lightboxAlt||'';caption.textContent=img.alt;lightbox.classList.add('open');document.body.classList.add('lightbox-open');lightbox.querySelector('.massage-lightbox-close').focus();}));
+ const img=lightbox.querySelector('img'),caption=lightbox.querySelector('figcaption'),figure=lightbox.querySelector('figure');
+ let panel=lightbox.querySelector('.knowledge-detail-panel');
+ if(!panel){panel=document.createElement('div');panel.className='knowledge-detail-panel';panel.innerHTML='<span class="knowledge-detail-kicker">راهنمای سبک ماساژ</span><h2></h2><p class="knowledge-detail-description"></p><p class="knowledge-detail-extra"></p><div class="knowledge-detail-foot">پیش از شروع جلسه، هدف، شدت مطلوب، حساسیت‌ها و وضعیت سلامت خود را با ماسور در میان بگذارید.</div>';figure.appendChild(panel);}
+ const close=()=>{lightbox.classList.remove('open','is-knowledge');document.body.classList.remove('lightbox-open');img.src='';};
+ document.querySelectorAll('.massage-photo-card,.knowledge-image-button').forEach(card=>card.addEventListener('click',()=>{
+   img.src=card.dataset.lightboxSrc||card.querySelector('img')?.src||'';img.alt=card.dataset.lightboxAlt||card.querySelector('img')?.alt||'';
+   const isKnowledge=card.classList.contains('knowledge-image-button');
+   lightbox.classList.toggle('is-knowledge',isKnowledge);
+   if(isKnowledge){
+     const article=card.closest('.knowledge-card'),title=article?.querySelector('h3')?.textContent?.trim()||img.alt,desc=article?.querySelector('p')?.textContent?.trim()||'';
+     const section=article?.closest('.knowledge-category'),category=section?.querySelector('.knowledge-category-head h2')?.textContent?.trim()||'بانک دانش ماساژ';
+     panel.querySelector('h2').textContent=title;panel.querySelector('.knowledge-detail-kicker').textContent=category;panel.querySelector('.knowledge-detail-description').textContent=desc;
+     const context=section?.querySelector('.knowledge-category-head p')?.textContent?.trim()||'';
+     panel.querySelector('.knowledge-detail-extra').textContent=context+' این معرفی برای شناخت عمومی است؛ اجرای عملی هر روش به آموزش مناسب، رعایت ایمنی و تنظیم فشار بر اساس بازخورد مراجعه‌کننده نیاز دارد.';
+     panel.hidden=false;caption.textContent='';
+   }else{panel.hidden=true;caption.textContent=img.alt;}
+   lightbox.classList.add('open');document.body.classList.add('lightbox-open');lightbox.querySelector('.massage-lightbox-close').focus();
+ }));
  lightbox.querySelectorAll('.massage-lightbox-close,.massage-lightbox-backdrop').forEach(b=>b.addEventListener('click',close));
  document.addEventListener('keydown',e=>{if(e.key==='Escape')close();});
 })();
